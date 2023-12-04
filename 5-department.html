@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Student</title>
+</head>
+<body>
+    <h1>Find Students</h1>
+    <label for="">Enter Department Id : </label><input type="text" id="deptId">
+    <button id="clickMe"> Submit </button>
+    <h2 id="headings"></h2>
+    <ul id="lists">
+    </ul>
+
+
+    <script>
+        let dept1 = ['ram', 'jawa', 'hari']
+        let dept2 = ['sam', 'mani', 'hema']
+        let dept3 = ['raj', 'aarthika', 'rachel']
+        let dept4 = ['karuppasamy', 'royston', 'anandh']
+
+        let departmentId = {1: dept1, 2: dept2, 3: dept3, 4: dept4}
+
+        let deptId = document.getElementById('deptId')
+        let button = document.getElementById('clickMe')
+        let lists = document.getElementById('lists')
+        let headings = document.getElementById('headings')
+
+
+
+        button.addEventListener('click', ()=> {
+            if(deptId.value in departmentId){
+                let students = departmentId[deptId.value]
+                headings.innerHTML = `The Department id ${deptId.value} has ${students.length} students`
+                for( let i of students){
+                    let stud = document.createElement('li')
+                    stud.innerHTML = i
+                    lists.appendChild(stud)
+                }
+
+            }
+            else{
+                alert("Department Does not Exist")
+            }
+        })
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
