@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cab App</title>
+</head>
+<body>
+    <h1>CAB Application</h1>
+    <form action="" id="forms">
+        <label for="name" id="">Name: </label><input type="text" id="name"><br/>
+        <label for="">Select Cars</label>
+        <Select id="cars">
+            <option value="car1">Micro Rs.10/km</option>
+            <option value="car2">Mini Rs.15/km</option>
+            <option value="car3">Prime Rs.25/km</option>
+        </Select><br>
+
+        <label for="km"> Enter Total KM </label><input type="number" name="" id="totalkm">
+        <p>use promocode FIRSTRIDE for extra 10% discount</p>
+        <label for="coupon">Promocode</label><input type="text" name="" id="promocode">
+        <br>
+        <input type="submit" id="submit">
+    </form>
+    <script>
+        let forms = document.getElementById('forms')
+        forms.addEventListener('submit', (fare) => {
+            fare.preventDefault();
+            let name = document.getElementById('name')
+            let cars = document.getElementById('cars')
+            let total = document.getElementById('totalkm').value
+            let coupon = document.getElementById('promocode')
+
+            let amount = 0
+            let selectedCars = ""
+
+            switch(cars.value){
+                case "car1":
+                    amount = total * 10
+                    selectedCars = 'Micro'
+                    break
+                case "car2":
+                    amount = total * 15
+                    selectedCars = 'Mini'
+                    break
+                case "car3":
+                    amount = total * 25
+                    selectedCars = 'Prime'
+                    break
+                           
+            }
+            
+     
+            if(coupon.value == 'FIRSTRIDE'){
+                let discount = amount*0.10;
+                let totalbill = amount - discount
+                alert(`Your Name is ${name.value} and you have booked ${total} km with ${selectedCars}\n your Total bill amount is ${amount}\n offer applied      - ${discount}\n\n Your total bill is ${totalbill}`)
+
+            }
+            else{
+                alert(`Your Name is ${name.value} and you have booked ${total} km with ${selectedCars}\n your Total bill amount is ${amount}`)
+
+            }
+         
+    
+        });
+    </script>
+</body>
+</html>
+
