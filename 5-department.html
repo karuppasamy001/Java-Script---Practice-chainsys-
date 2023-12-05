@@ -30,13 +30,20 @@
 
 
         button.addEventListener('click', ()=> {
+
+            const available = lists.getElementsByTagName('li')
+            for(let i = available.length - 1; i>=0; i--){
+                available[i].remove()
+            }
+
+
             if(deptId.value in departmentId){
                 let students = departmentId[deptId.value]
                 headings.innerHTML = `The Department id ${deptId.value} has ${students.length} students`
                 for( let i of students){
                     let stud = document.createElement('li')
                     stud.innerHTML = i
-                    lists.appendChild(stud)
+                    lists.append(stud)
                 }
 
             }
