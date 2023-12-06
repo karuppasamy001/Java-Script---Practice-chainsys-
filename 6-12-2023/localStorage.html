@@ -1,0 +1,161 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Storage Example</title>
+</head>
+<body>
+    <script>
+
+        localStorage.clear()
+        
+        // store data in localStorage 
+
+        localStorage.setItem('userName', 'Karuppasamy')
+        localStorage.setItem('userId', '917722013')
+
+        // retrive data from localstorage
+
+        const userName = localStorage.getItem("userName")
+        let userId = localStorage.getItem("userId")
+
+        console.log("userName : " + userName)
+        console.log("userId : " + userId) 
+        
+        // convert userId string to number
+
+        userId = Number(userId)
+        console.log("userId to Number : " + typeof(userId) + userId)
+
+        // short syntax to get data from local storage
+
+        const userName1 = localStorage.userName
+        const userId1 = localStorage.userId
+
+        console.log("(shortForm) userName : " + userName1)
+        console.log("(shortForm) userId : " + userId1) 
+
+
+        // remove an item from localstorage
+
+        const key = 'userName'
+
+        localStorage.removeItem(key)
+
+        console.log("After removing username "+localStorage.userName)
+
+        // remove all item from localstorage
+
+        localStorage.clear()
+        console.log("After removing all " + localStorage.userId)
+
+
+        // Store username and userId in localStorage as an object
+        
+        let obj = {
+            'userName' : 'Karuppasamy',
+            'password' : 'pass001'
+        }
+
+        obj = JSON.stringify(obj)
+
+        localStorage.setItem('userDetails', obj)
+
+
+        // displaying Data in localStorage
+
+        const newObj = JSON.parse(localStorage.userDetails)
+        console.log(newObj)
+        console.log(localStorage.userDetails)
+
+        // create user array and store users data and store users array in local storage
+        let arr = [
+            {'name':'John','age':25},
+            {'name':'Jane','age':30}
+        ]
+        arr = JSON.stringify(arr)
+        localStorage.setItem('users', arr)
+
+        // display the stored users array
+        let usersArr = JSON.parse(localStorage.getItem('users'))
+
+        for(i of usersArr){
+            console.log("name = " +i.name +" Age = " +i.age)
+        }
+
+        // Add users to existing local storage
+        usersArr.push({'name': 'peter', 'age':32})
+        localStorage.setItem("users", JSON.stringify(usersArr))
+
+        // display users after adding new users
+        let newArr = JSON.parse(localStorage.users)
+        console.log(newArr)
+
+        // search a user exist for the given input
+        let search = 'peter'
+        for(i of newArr){
+            if (search == i.name){
+                console.log("Available")
+            }
+        }
+
+        // multiple input search
+        
+        search = [
+            {'name' : 'karuppasamy', 'age' : 27},
+            {'name' : 'John', 'age' : 25},
+            {'name' : 'peter', 'age' : 32}
+        ]
+        
+        for(i of search){
+            let flag = true
+            for(k of newArr){
+                if(i.name == k.name && i.age == k.age){
+                    console.log(`${i.name} is available`)
+                    flag = false
+                }
+                
+            }
+            if(flag){
+                console.log(`${i.name} is not available`)
+            }
+        }
+
+        // update specific date in localStorage
+
+        for(i of newArr){
+            if(i.name == 'peter'){
+                i.name = 'rick'
+            }
+        }
+
+        localStorage.setItem('users', JSON.stringify(newArr))
+        console.log(localStorage.users)
+
+        // adding new field in localStorage 'active' ans sets to 0
+
+        for(i of newArr){
+            i.active = 0
+        }
+
+        localStorage.setItem('users', JSON.stringify(newArr))
+        console.log(localStorage.users)
+
+
+        // update active field from 0 to 1 for users who has age < 30
+
+        for(i of newArr){
+            if(i.age < 30){
+                i.active = 1
+            }
+        }
+
+        localStorage.setItem('users', JSON.stringify(newArr))
+        console.log(localStorage.users)
+
+
+    </script>
+</body>
+</html>
